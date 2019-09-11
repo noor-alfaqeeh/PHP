@@ -33,7 +33,7 @@ try {
     
     $id = $_GET['ID'];
     $sql = 'SELECT * FROM users WHERE id=:ID';
-    $statement = $connection->prepare($sql);
+    $statement = $conn->prepare($sql);
     $statement->execute([':ID' => $id ]);
     $users = $statement->fetch(PDO::FETCH_OBJ);
     if (isset ($_POST['username'])  && isset($_POST['email'])  && isset($_POST['password']) ) {
@@ -41,7 +41,7 @@ try {
       $email = $_POST['email'];
       $password = $_POST['password'];
       $sql = 'UPDATE users SET username=:username, email=:email, password=:password  WHERE id=:ID';
-      $statement = $connection->prepare($sql);
+      $statement = $conn->prepare($sql);
       if ($statement->execute([':name' => $name, ':email' => $email, ':password'=> $password,':id' => $id])) {
         header("Location: dashboard.php");
       }
